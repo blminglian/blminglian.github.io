@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>天气预报系统 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="链接 :http:&#x2F;&#x2F;127.0.0.1:8000&#x2F;views部分代码：from django.shortcuts import render #Create your views here. from django.shortcuts import render import requests from lxml import etree import json def get_response">
+<meta property="og:type" content="article">
+<meta property="og:title" content="天气预报系统">
+<meta property="og:url" content="http://example.com/2021/12/22/%E5%A4%A9%E6%B0%94%E9%A2%84%E6%8A%A5%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="链接 :http:&#x2F;&#x2F;127.0.0.1:8000&#x2F;views部分代码：from django.shortcuts import render #Create your views here. from django.shortcuts import render import requests from lxml import etree import json def get_response">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-12-22T15:11:31.000Z">
+<meta property="article:modified_time" content="2021-12-22T15:36:47.717Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-天气预报系统" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/12/22/%E5%A4%A9%E6%B0%94%E9%A2%84%E6%8A%A5%E7%B3%BB%E7%BB%9F/" class="article-date">
+  <time datetime="2021-12-22T15:11:31.000Z" itemprop="datePublished">2021-12-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      天气预报系统
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="链接-http-127-0-0-1-8000"><a href="#链接-http-127-0-0-1-8000" class="headerlink" title="链接 :http://127.0.0.1:8000/"></a>链接 :<a target="_blank" rel="noopener" href="http://127.0.0.1:8000/">http://127.0.0.1:8000/</a></h1><h1 id="views部分代码："><a href="#views部分代码：" class="headerlink" title="views部分代码："></a>views部分代码：</h1><pre><code>from django.shortcuts import render
+#Create your views here.
+from django.shortcuts import render
+import requests
+from lxml import etree
+import json
+def get_response(url):
+#设置头，防止被封
+headers = &#123;&#39;user-agent&#39;: &#39;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.149 Safari/537.36&#39;&#125;
+#利用request模块进行访问获取内容
+response = requests.get(url, headers=headers)
+response.encoding = &#39;utf-8&#39;
+# print(response.text)
+#利用etree模块，解析返回的内容
+selector = etree.HTML(response.text)
+#返回etree对象
+return selector
+def read_json():
+with open(&#39;城市码.json&#39;,&#39;r&#39;,encoding=&#39;utf8&#39;)as fp:
+    json_data = json.load(fp)
+return json_data
+def index(request):
+city =&quot;北京&quot;
+nowcity =&quot;101010100&quot;
+daima = &#123;&quot;北京&quot;:&quot;101010100&quot;,&quot;天津&quot;: &quot;101030100&quot;, &quot;上海&quot;: &quot;101020100&quot;,&quot;石家庄&quot;: &quot;101090101&quot;,&quot;郑州&quot;: &quot;101180101&quot;,&quot;合肥&quot;: &quot;101220101&quot;,&quot;杭州&quot;: &quot;101210101&quot;,&quot;重庆&quot;: &quot;101040100&quot;,
+         &quot;福州&quot;: &quot;101230101&quot;,&quot;兰州&quot;: &quot;101160101&quot;,&quot;广州&quot;: &quot;101280101&quot;,&quot;南宁&quot;: &quot;101300101&quot;,&quot;贵阳&quot;: &quot;101260101&quot;,&quot;昆明&quot;: &quot;101290101&quot;,&quot;呼和浩特&quot;: &quot;101080101&quot;,&quot;南昌&quot;: &quot;101240101&quot;,
+         &quot;武汉&quot;: &quot;101200101&quot;,&quot;成都&quot;: &quot;101270101&quot;,&quot;银川&quot;: &quot;101170101&quot;,&quot;西宁&quot;: &quot;101150101&quot;,&quot;济南&quot;: &quot;101120101&quot;,&quot;西安&quot;: &quot;101110101&quot;, &quot;太原&quot;: &quot;101100101&quot;,&quot;乌鲁木齐&quot;: &quot;101130101&quot;,
+         &quot;拉萨&quot;: &quot;101140101&quot;,&quot;台北县&quot;: &quot;101340101&quot;,&quot;海口&quot;: &quot;101310101&quot;,&quot;长沙&quot;: &quot;101250101&quot;,&quot;南京&quot;: &quot;101190101&quot;,&quot;哈尔滨&quot;: &quot;101050101&quot;,&quot;长春&quot;: &quot;101060101&quot;,&quot;沈阳&quot;: &quot;101070101&quot;&#125;
+if request.method == &#39;POST&#39;:
+    city = request.POST[&#39;city&#39;]
+    nowcity = daima[city]
+url =&#39;http://www.weather.com.cn/weather/&#123;&#125;.shtml&#39;.format(nowcity)
+selector = get_response(url)
+w_date=[]
+name_list = [&quot;晴&quot;,&quot;霾&quot;,&quot;雾&quot;,&quot;雷阵雨伴冰雹&quot;,&quot;雷阵雨&quot;,&quot;雨夹雪&quot;,&quot;阵雪&quot;,&quot;阵雨&quot;,&quot;阴&quot;,&quot;阴天&quot;,&quot;特大暴雨&quot;,&quot;浮沉&quot;,&quot;沙尘暴&quot;,&quot;暴雪&quot;,&quot;暴雨转大暴雨&quot;,&quot;暴雨&quot;,&quot;晴&quot;,&quot;扬沙&quot;,&quot;强沙尘暴&quot;,&quot;小雪转中雪&quot;,&quot;小雪&quot;,&quot;小雨转中雨&quot;,&quot;小雨&quot;,&quot;大雪转暴雪&quot;,&quot;大雪&quot;,&quot;大雨转暴雨&quot;,&quot;大雨&quot;,&quot;大暴雨转特大暴雨&quot;,&quot;大暴雨&quot;,&quot;多云&quot;,&quot;冻雨&quot;,&quot;中雪转大雪&quot;,&quot;中雪&quot;,&quot;中雨转大雨&quot;,&quot;中雨&quot;]
+for i in range(1,5):
+    data=&#123;&#125;
+    riqi = selector.xpath(&#39;//ul[@class=&quot;t clearfix&quot;]/li[%d]/h1/text()&#39;%i)[0]
+    tianqi= selector.xpath(&#39;//ul[@class=&quot;t clearfix&quot;]/li[%d]/p[@class=&quot;wea&quot;]/text()&#39;%i)[0]
+    wendu= &quot;&quot;.join(i for i in selector.xpath(&#39;//ul[@class=&quot;t clearfix&quot;]/li[%d]/p[@class=&quot;tem&quot;]//text()&#39;%i)).replace(&quot;\n&quot;,&quot;&quot;)
+    fengxiang = &quot;、&quot;.join(i for i in selector.xpath(&#39;//ul[@class=&quot;t clearfix&quot;]/li[%d]/p[@class=&quot;win&quot;]/em/span/@title&#39;%i))
+    fengli = selector.xpath(&#39;//ul[@class=&quot;t clearfix&quot;]/li[%d]/p[@class=&quot;win&quot;]/i/text()&#39;%i)[0]
+    data[&#39;riqi&#39;] = riqi
+    data[&#39;tianqi&#39;] = tianqi
+    data[&#39;dayPictureUrl&#39;]= &quot;彩虹.png&quot;
+    if tianqi in name_list:
+        data[&#39;dayPictureUrl&#39;]=tianqi+&quot;.png&quot;
+    else:
+        if &quot;转&quot; in tianqi:
+            data[&#39;dayPictureUrl&#39;]=tianqi.split(&quot;转&quot;)[0]+&quot;.png&quot;
+    data[&#39;wendu&#39;] = wendu
+    data[&#39;fengxiang&#39;] = fengxiang
+    data[&#39;fengli&#39;] = fengli
+    w_date.append(data)
+nowtq = w_date[0]
+onetq = w_date[1]
+twotq = w_date[2]
+threetq = w_date[3]
+print(w_date)
+context = &#123;
+    &#39;city&#39;: city,
+    &#39;weather_list&#39;: w_date,
+    &#39;nowtq&#39;: nowtq,
+    &#39;onetq&#39;: onetq,
+    &#39;twotq&#39;: twotq,
+    &#39;threetq&#39;: threetq,
+    &#39;nowcity&#39;: nowcity,
+&#125;
+return render(request, template_name=&#39;index.html&#39;, context=context)
+</code></pre>
+<h1 id="setting部分代码："><a href="#setting部分代码：" class="headerlink" title="setting部分代码："></a>setting部分代码：</h1><pre><code>from pathlib import Path
+import os
+#Build paths inside the project like this: BASE_DIR / &#39;subdir&#39;.
+BASE_DIR = Path(__file__).resolve().parent.parent
+#Quick-start development settings - unsuitable for production
+#See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
+#SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = &#39;django-insecure-v5r2$wlun%ry^-6!+%k9q06xoi0!nzf6n)0*m+1jhad4_)*9t2&#39;
+#SECURITY WARNING: don&#39;t run with debug turned on in production!
+DEBUG = True
+ALLOWED_HOSTS = []
+#Application definition
+INSTALLED_APPS = [
+&#39;django.contrib.admin&#39;,
+&#39;django.contrib.auth&#39;,
+&#39;django.contrib.contenttypes&#39;,
+&#39;django.contrib.sessions&#39;,
+&#39;django.contrib.messages&#39;,
+&#39;django.contrib.staticfiles&#39;,
+&#39;tqybapp&#39;
+]   
+MIDDLEWARE = [
+&#39;django.middleware.security.SecurityMiddleware&#39;,
+&#39;django.contrib.sessions.middleware.SessionMiddleware&#39;,
+&#39;django.middleware.common.CommonMiddleware&#39;,
+&#39;django.middleware.csrf.CsrfViewMiddleware&#39;,
+&#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;,
+&#39;django.contrib.messages.middleware.MessageMiddleware&#39;,
+&#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;,
+]
+ROOT_URLCONF = &#39;tqybproject.urls&#39;
+TEMPLATES = [
+&#123;
+    &#39;BACKEND&#39;: &#39;django.template.backends.django.DjangoTemplates&#39;,
+    &#39;DIRS&#39;: [os.path.join(BASE_DIR, &#39;templates&#39;)],
+    &#39;APP_DIRS&#39;: True,
+    &#39;OPTIONS&#39;: &#123;
+        &#39;context_processors&#39;: [
+            &#39;django.template.context_processors.debug&#39;,
+            &#39;django.template.context_processors.request&#39;,
+            &#39;django.contrib.auth.context_processors.auth&#39;,
+            &#39;django.contrib.messages.context_processors.messages&#39;,
+            ],
+        &#125;,
+    &#125;,
+]
+WSGI_APPLICATION = &#39;tqybproject.wsgi.application&#39;
+#Database
+#https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+DATABASES = &#123;
+&#39;default&#39;: &#123;
+    &#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,
+    &#39;NAME&#39;: BASE_DIR / &#39;db.sqlite3&#39;,
+    &#125;
+&#125;
+#Password validation
+#https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
+AUTH_PASSWORD_VALIDATORS = [
+&#123;
+    &#39;NAME&#39;: &#39;django.contrib.auth.password_validation.UserAttributeSimilarityValidator&#39;,
+&#125;,
+&#123;
+    &#39;NAME&#39;: &#39;django.contrib.auth.password_validation.MinimumLengthValidator&#39;,
+&#125;,
+&#123;
+    &#39;NAME&#39;: &#39;django.contrib.auth.password_validation.CommonPasswordValidator&#39;,
+&#125;,
+&#123;
+    &#39;NAME&#39;: &#39;django.contrib.auth.password_validation.NumericPasswordValidator&#39;,
+&#125;,
+]
+#Internationalization
+#https://docs.djangoproject.com/en/3.2/topics/i18n/
+LANGUAGE_CODE = &#39;zh-hans&#39;
+TIME_ZONE = &#39;UTC&#39;
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+#Static files (CSS, JavaScript, Images)
+#https://docs.djangoproject.com/en/3.2/howto/static-files/
+STATIC_URL = &#39;/static/&#39;
+STATICFILES_DIRS = (
+os.path.join(BASE_DIR, &#39;static&#39;),
+)
+#Default primary key field type
+#https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
+DEFAULT_AUTO_FIELD = &#39;django.db.models.BigAutoField&#39;
+</code></pre>
+<h1 id="urls部分代码："><a href="#urls部分代码：" class="headerlink" title="urls部分代码："></a>urls部分代码：</h1><pre><code>from django.contrib import admin
+from django.urls import path
+from tqybapp import views
+urlpatterns = [
+path(&#39;admin/&#39;, admin.site.urls),
+path(&#39;&#39;,views.index)
+]
+</code></pre>
+<h1 id="manage部分代码："><a href="#manage部分代码：" class="headerlink" title="manage部分代码："></a>manage部分代码：</h1><pre><code>import os
+import sys
+def main():
+&quot;&quot;&quot;Run administrative tasks.&quot;&quot;&quot;
+os.environ.setdefault(&#39;DJANGO_SETTINGS_MODULE&#39;, &#39;tqybproject.settings&#39;)
+try:
+    from django.core.management import execute_from_command_line
+except ImportError as exc:
+    raise ImportError(
+        &quot;Couldn&#39;t import Django. Are you sure it&#39;s installed and &quot;
+        &quot;available on your PYTHONPATH environment variable? Did you &quot;
+        &quot;forget to activate a virtual environment?&quot;
+    ) from exc
+execute_from_command_line(sys.argv)
+if __name__ == &#39;__main__&#39;:
+main()
+</code></pre>
+<h1 id="app部分代码"><a href="#app部分代码" class="headerlink" title="app部分代码:"></a>app部分代码:</h1><pre><code>from django.apps import AppConfig
+class TqybappConfig(AppConfig):
+default_auto_field = &#39;django.db.models.BigAutoField&#39;
+name = &#39;tqybapp&#39;
+</code></pre>
+<h1 id="html部分代码："><a href="#html部分代码：" class="headerlink" title="html部分代码："></a>html部分代码：</h1><pre><code>&#123;% load static %&#125;
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;title&gt;&#123;&#123;city&#125;&#125;天气信息&lt;/title&gt;
+  &lt;style&gt;
+    html,body&#123;
+      height:100%;
+      margin:0;
+     color: white;
+    text-align: center;
+    &#125;
+    body&#123;
+      /*渐变色*/
+      background: linear-gradient(#1078c7,#7196b4);
+    &#125;
+    #d1&#123;
+        height: 50px;
+    &#125;
+    form&#123;
+      text-align: center;
+    &#125;
+    main img&#123;
+      width: 80px;
+    &#125;
+    h1&#123;
+      margin:5px;
+    &#125;
+    footer&#123;
+      display: flex;
+    &#125;
+    section&#123;
+      flex-grow: 1;
+      border-right:1px solid greenyellow;
+    &#125;
+    section:nth-child(3)&#123;
+      border:none;
+    &#125;
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div id=&quot;d1&quot;&gt;&lt;/div&gt;
+  &lt;form action=&quot;/&quot; method=&quot;POST&quot;&gt;
+    &#123;% csrf_token %&#125;
+    &lt;input name=&quot;city&quot; type=&quot;text&quot; placeholder=&quot;请输入城市&quot;&gt;
+    &lt;button type=&quot;submit&quot;&gt;查询&lt;/button&gt;
+  &lt;/form&gt;
+  &lt;main&gt;
+    &lt;h2&gt;实时天气&lt;/h2&gt;
+      &lt;h3&gt;&#123;&#123; city &#125;&#125;&lt;/h3&gt;
+    &lt;img src=&quot;static/images/&#123;&#123; nowtq.dayPictureUrl &#125;&#125;&quot; alt=&quot;&quot;&gt;
+    &lt;h1&gt;&#123;&#123;nowtq.tianqi&#125;&#125;&lt;/h1&gt;
+    &lt;div&gt;
+      &#123;&#123;nowtq.wendu&#125;&#125;&lt;br&gt;
+      &#123;&#123;nowtq.fengxiang&#125;&#125;&lt;br&gt;
+      &#123;&#123;nowtq.fengli&#125;&#125;&lt;br&gt;
+      &#123;&#123;nowtq.riqi&#125;&#125;&lt;br&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+&lt;div id=&quot;d1&quot;&gt;&lt;/div&gt;
+  &lt;footer&gt;
+&#123;#    &#123;% for weather in list %&#125;#&#125;
+      &lt;section&gt;
+       &lt;h4&gt;&#123;&#123;onetq.riqi&#125;&#125;&lt;/h4&gt;
+        &lt;img src=&quot;static/images/&#123;&#123; onetq.dayPictureUrl &#125;&#125;&quot; alt=&quot;&quot;&gt;
+        &lt;div&gt;
+          &#123;&#123;onetq.tianqi&#125;&#125;&lt;br&gt;
+          &#123;&#123;onetq.wendu&#125;&#125;&lt;br&gt;
+          &#123;&#123;onetq.fengxiang&#125;&#125;&lt;br&gt;
+          &#123;&#123;onetq.fengli&#125;&#125;&lt;br&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+           &lt;section&gt;
+        &lt;h4&gt;&#123;&#123;twotq.riqi&#125;&#125;&lt;/h4&gt;
+        &lt;img src=&quot;static/images/&#123;&#123; twotq.dayPictureUrl &#125;&#125;&quot; alt=&quot;&quot;&gt;
+        &lt;div&gt;
+           &#123;&#123;twotq.tianqi&#125;&#125;&lt;br&gt;
+          &#123;&#123;twotq.wendu&#125;&#125;&lt;br&gt;
+          &#123;&#123;twotq.fengxiang&#125;&#125;&lt;br&gt;
+          &#123;&#123;twotq.fengli&#125;&#125;&lt;br&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+            &lt;section&gt;
+        &lt;h4&gt;&#123;&#123;threetq.riqi&#125;&#125;&lt;/h4&gt;
+        &lt;img src=&quot;static/images/&#123;&#123; threetq.dayPictureUrl &#125;&#125;&quot; alt=&quot;&quot;&gt;
+        &lt;div&gt;
+          &#123;&#123;threetq.tianqi&#125;&#125;&lt;br&gt;
+        &#123;&#123;threetq.wendu&#125;&#125;&lt;br&gt;
+        &#123;&#123;threetq.fengxiang&#125;&#125;&lt;br&gt;
+        &#123;&#123;threetq.fengli&#125;&#125;&lt;br&gt;
+        &lt;/div&gt;
+      &lt;/section&gt;
+&#123;#    &#123;% endfor %&#125;#&#125;
+  &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/12/22/%E5%A4%A9%E6%B0%94%E9%A2%84%E6%8A%A5%E7%B3%BB%E7%BB%9F/" data-id="ckxhuzkiw0001r8va8iaggl89" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2021/12/22/%E8%87%AA%E5%8A%A8%E9%93%BE%E6%8E%A5%E6%A0%A1%E5%9B%AD%E7%BD%91%E2%80%9C/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          自动链接校园网“
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/12/">December 2021</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/12/23/%E4%B9%A6%E4%B8%8A%E4%B8%89%E4%B8%AA%E4%BD%9C%E4%B8%9A/">书上三个作业</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/23/%E5%A4%A9%E6%B0%94%E9%A2%84%E6%8A%A5%E6%95%B0%E6%8D%AE%E5%BA%93%E7%89%88/">天气预报数据库版</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/22/%E5%AD%A6%E7%94%9F%E9%9A%8F%E6%9C%BA%E5%88%86%E9%85%8D%E5%AF%BC%E5%B8%88/">学生随机分配导师</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/22/%E8%87%AA%E5%8A%A8%E9%93%BE%E6%8E%A5%E6%A0%A1%E5%9B%AD%E7%BD%91%E2%80%9C/">自动链接校园网“</a>
+          </li>
+        
+          <li>
+            <a href="/2021/12/22/%E5%A4%A9%E6%B0%94%E9%A2%84%E6%8A%A5%E7%B3%BB%E7%BB%9F/">天气预报系统</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
